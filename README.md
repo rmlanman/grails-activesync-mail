@@ -1,4 +1,4 @@
-grails-activesync-mail
+Grails ActiveSync Mail Plugin
 ======================
 
 Grails plugin for sending mail to an Exchange ActiveSync provider.
@@ -17,7 +17,7 @@ Use
 --------
 To use it, simply include it in the plugins section of BuildConfig.groovy as such:
 
-```
+```groovy
 plugins {
   runtime ":twitter-bootstrap:3.2.0.2"
 }
@@ -28,11 +28,11 @@ Before you can begin using it, you need to configure the client with connection 
 Configure
 ---------
 
-```
-grails.plugin.eas.server = https://outlook.office365.com  //the server on which your target ActiveSync service is hosted
-grails.plugin.eas.userDomain = FOO //the Windows domain that the email user you will be using belongs to
-grails.plugin.eas.username = bar //the username of the email user you intend to send emails as
-grails.plugin.eas.password = password //the password of the email user you intend to send emails as
+```groovy
+grails.plugin.eas.server = 'https://outlook.office365.com'  //the server on which your target ActiveSync service is hosted
+grails.plugin.eas.userDomain = 'FOO' //the Windows domain that the email user you will be using belongs to
+grails.plugin.eas.username = 'bar' //the username of the email user you intend to send emails as
+grails.plugin.eas.password = 'password' //the password of the email user you intend to send emails as
 ```
 
 Limitations
