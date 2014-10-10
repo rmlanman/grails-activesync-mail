@@ -83,7 +83,7 @@ public class EasMailClient {
 		final HttpResponse resp = sendHttpPostRequest(SEND_EMAIL_CMD, 
 				new SendMailEntity(new ByteArrayInputStream(mimeBody), mimeBody.length));
 		
-		final Header contentLengthHeader = resp.getFirstHeader("Content-Type");
+		final Header contentLengthHeader = resp.getFirstHeader("Content-Length");
 		final int contentLength = contentLengthHeader == null ? 0 : Integer.parseInt(contentLengthHeader.getValue());
 		final int code = resp.getStatusLine().getStatusCode(); 
 
