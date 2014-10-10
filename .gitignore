@@ -28,3 +28,9 @@
 
 # "temporary" build files
 /target
+
+/.settings
+/target-eclipse
+*.classpath
+*.project
+*.sha1
