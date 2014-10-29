@@ -19,7 +19,7 @@ To use it, simply include it in the plugins section of BuildConfig.groovy as suc
 
 ```groovy
 plugins {
-  runtime ":twitter-bootstrap:3.2.0.2"
+  runtime ":grails-activesync-mail:0.1"
 }
 ```
 
