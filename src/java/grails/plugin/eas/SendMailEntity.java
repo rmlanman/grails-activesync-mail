@@ -31,17 +31,15 @@ import java.io.OutputStream;
 
 import org.apache.http.entity.InputStreamEntity;
 
-public class SendMailEntity extends InputStreamEntity {    
-    private final InputStream inputStream;
-    private final long mimeLength;        
+public class SendMailEntity extends InputStreamEntity {
+	private final long mimeLength;
 
     private static final int[] MODE_TAGS =  new int[] {Tags.COMPOSE_SEND_MAIL,
         Tags.COMPOSE_SMART_REPLY, Tags.COMPOSE_SMART_FORWARD};
 
     public SendMailEntity(InputStream instream, long length) {
-        super(instream, length);        
-        inputStream = instream;
-        mimeLength = length;        
+        super(instream, length);       
+        this.mimeLength = length;
     }
 
     /**
@@ -100,7 +98,7 @@ public class SendMailEntity extends InputStreamEntity {
         s.start(Tags.COMPOSE_MIME);
         // Send opaque data from the file stream
         if (withData) {
-            s.opaque(inputStream, (int)mimeLength);
+            s.opaque(getContent(), (int)mimeLength);
         } else {
             s.opaqueWithoutData((int)mimeLength);
         }

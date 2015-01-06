@@ -29,6 +29,7 @@ import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 
 public class EasMailClient {
@@ -87,21 +88,25 @@ public class EasMailClient {
 		final int contentLength = contentLengthHeader == null ? 0 : Integer.parseInt(contentLengthHeader.getValue());
 		final int code = resp.getStatusLine().getStatusCode(); 
 
-		if (code == HttpStatus.SC_OK) {
-			if (contentLength > 0) {
-				SendMailParser parser = new SendMailParser(resp.getEntity()
-						.getContent());
-				if (parser.parse()) {				
-					if (CommandStatus.isNeedsProvisioning(parser.getStatus())) {
-						tryProvision();
-						sendEmail(message, retry + 1);
-					}			
+		try {
+			if (code == HttpStatus.SC_OK) {
+				if (contentLength > 0) {
+					SendMailParser parser = new SendMailParser(resp.getEntity()
+							.getContent());
+					if (parser.parse()) {				
+						if (CommandStatus.isNeedsProvisioning(parser.getStatus())) {
+							tryProvision();
+							sendEmail(message, retry + 1);
+						}			
+					} else {
+						log.error("Unexpected response from SendMail request");
+					}
 				} else {
-					log.error("Unexpected response from SendMail request");
+					log.debug(String.format("Successfully sent email"));
 				}
-			} else {
-				log.debug(String.format("Successfully sent email"));
 			}
+		} finally {
+			EntityUtils.consume(resp.getEntity());
 		}
 	}
 
