@@ -19,7 +19,7 @@ To use it, simply include it in the plugins section of BuildConfig.groovy as suc
 
 ```groovy
 plugins {
-  runtime ":grails-activesync-mail:0.1"
+  runtime ":grails-activesync-mail:0.2"
 }
 ```
 
